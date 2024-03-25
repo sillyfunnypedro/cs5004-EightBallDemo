@@ -18,7 +18,9 @@ public class EightBallView extends JFrame implements EightBallViewInterface {
 
   private Language language = Language.English;
 
-  private JLabel currentLanguage;
+  private final JLabel currentLanguage;
+
+  private int lastAnswer = -2;
 
   private final JButton languageButton;
 
@@ -50,7 +52,7 @@ public class EightBallView extends JFrame implements EightBallViewInterface {
     // Add text input
     questionTextField = new JTextField(30);
     inputPanel.add(questionTextField);
-    
+
 
     panel.add(inputPanel);
     // Add button next to text input
@@ -137,6 +139,7 @@ public class EightBallView extends JFrame implements EightBallViewInterface {
    * @param answer the answer to the question.
    */
   private void setAnswer(int answer) {
+    this.lastAnswer = answer;
     if (this.language == Language.English) {
       setEnglishAnswer(answer);
     } else {
@@ -152,6 +155,9 @@ public class EightBallView extends JFrame implements EightBallViewInterface {
   private void setSpanishAnswer(int answer) {
     String message = "";
     switch (answer) {
+      case -2:
+        message = "¡No has hecho una pregunta!";
+        break;
       case -1:
         message = "Si no haces una pregunta: No obtendrás una respuesta.";
         break;
@@ -199,6 +205,9 @@ public class EightBallView extends JFrame implements EightBallViewInterface {
   private void setEnglishAnswer(int answer) {
     String message = "";
     switch (answer) {
+      case -2:
+        message = "You have not asked a question!";
+        break;
       case -1:
         message = "If you don't ask a question: You won't get an answer.";
         break;
@@ -262,6 +271,11 @@ public class EightBallView extends JFrame implements EightBallViewInterface {
       default:
         this.currentLanguage.setText("Current Language: English");
     }
+
+
+    setAnswer(this.lastAnswer);
+
+
   }
 
 }

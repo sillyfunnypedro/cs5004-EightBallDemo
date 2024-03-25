@@ -7,20 +7,20 @@ public class EightBallModel implements EightBallModelInterface {
 
   String lastQuestion;
   int lastAnswer;
+
   /**
    * returns a random number between 0 and 10.
+   *
    * @return a random number between 0 and 10.
    */
   @Override
   public int askQuestion(String question) {
 
-    if (question == null ) {
+    if (question == null) {
       throw new IllegalArgumentException("Question cannot be null");
     }
 
-    /**
-     * If the question is empty, return -1.
-     */
+    // Check if the question is empty and return -1
     if (question.isEmpty()) {
       return -1;
     }
